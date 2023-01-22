@@ -7,12 +7,15 @@ public class Reservation
 {
     [Key]
     public int Id { get; set; }
+
     [ForeignKey("RoomId")]
     public Room Room { get; set; }
+
     public int RoomId { get; set; }
 
     [ForeignKey("GuestId")]
     public Guest Guest { get; set; }
+
     public int GuestId { get; set; }
 
     [Required]

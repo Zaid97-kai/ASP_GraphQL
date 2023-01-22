@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "GraphQL"
+  "defaultProject": "GraphQL",
+  "cli": {
+    "analytics": "b6ef3731-542d-4cfd-8caa-12047a51a2e4"
+  }
 }

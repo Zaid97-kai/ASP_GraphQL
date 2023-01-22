@@ -1,8 +1,16 @@
+using GraphQL.Entities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration["ConnectionStrings:DbConnection"];
+
+builder.Services.AddDbContext<MyHotelDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddTransient<ReservationRepository>();
 
 var app = builder.Build();
 

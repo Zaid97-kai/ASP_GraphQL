@@ -22,7 +22,7 @@ public class Room
     {
 
     }
-    s
+    
     public Room(int number, string name, RoomStatus status, bool allowedSmoking)
     {
         Number = number;
