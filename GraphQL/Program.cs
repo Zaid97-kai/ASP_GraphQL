@@ -1,4 +1,6 @@
+using AutoMapper;
 using GraphQL.Entities;
+using GraphQL.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,15 @@ var connectionString = builder.Configuration["ConnectionStrings:DbConnection"];
 
 builder.Services.AddDbContext<MyHotelDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddTransient<ReservationRepository>();
+builder.Services.AddControllers();
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
@@ -25,6 +36,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapControllerRoute(
     name: "default",
